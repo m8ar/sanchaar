@@ -76,7 +76,7 @@ fn side_bar(state: &AppState) -> Element<MainPageMsg> {
 }
 
 fn tabs_view(state: &AppState) -> Element<MainPageMsg> {
-    let mut tabs = state.tabs.iter().collect::<Vec<_>>();
+    let mut tabs: Vec<(TabKey, &crate::state::Tab)> = state.tabs.iter().collect::<Vec<_>>();
     tabs.sort_unstable_by_key(|(_, v)| v.id);
 
     let tabs = tabs

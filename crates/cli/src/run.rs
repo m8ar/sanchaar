@@ -18,7 +18,7 @@ pub async fn run(root: PathBuf, req: PathBuf, verbose: bool) -> anyhow::Result<(
     let path = root.join(req);
     let req = read_request(&path).await?;
 
-    let client = create_client();
+    let (client, ..) = create_client();
     let req = transform_request(client.clone(), req, None).await?;
     let response = send_request(client, req).await?;
 

@@ -65,6 +65,7 @@ pub enum Popup {
     SaveRequest(SaveRequestState),
     PopupName(PopupNameState),
     AppSettings(AppSettingsState),
+    Cookies(),
 }
 
 fn open_popup(state: &mut AppState, popup: Popup) {
@@ -127,6 +128,11 @@ impl Popup {
         let popup = Self::AppSettings(AppSettingsState {
             active_tab: AppSettingTabs::General,
         });
+        open_popup(state, popup);
+    }
+
+    pub fn show_cookies(state: &mut AppState) {
+        let popup = Self::Cookies();
         open_popup(state, popup);
     }
 }

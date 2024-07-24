@@ -6,6 +6,7 @@ use crate::state::popups::Popup;
 use crate::state::AppState;
 
 mod app_settings;
+mod cookies;
 mod create_collection;
 mod environment_editor;
 mod name_popup;
@@ -20,6 +21,7 @@ pub enum PopupMsg {
     AppSettings(app_settings::Message),
     ClosePopup,
     Ignore,
+    Cookies(cookies::Message),
 }
 
 impl PopupMsg {
@@ -35,6 +37,7 @@ impl PopupMsg {
                 Task::none()
             }
             PopupMsg::Ignore => Task::none(),
+            PopupMsg::Cookies(msg) => msg.update(state).map(PopupMsg::Cookies),
         }
     }
 }
@@ -65,6 +68,11 @@ pub fn view<'a>(state: &'a AppState, popup: &'a Popup) -> Element<'a, PopupMsg> 
             app_settings::title(),
             app_settings::view(state, data).map(PopupMsg::AppSettings),
             app_settings::done(data).map(PopupMsg::AppSettings),
+        ),
+        Popup::Cookies() => (
+            cookies::title(),
+            cookies::view(state).map(PopupMsg::Cookies),
+            cookies::done().map(PopupMsg::Cookies),
         ),
     };
 

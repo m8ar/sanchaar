@@ -7,6 +7,8 @@ use core::client::create_client;
 use core::http::collection::RequestRef;
 use core::http::request::Request;
 use core::http::{CollectionRequest, Collections};
+use reqwest_cookie_store::CookieStoreMutex;
+use std::sync::Arc;
 pub use tab::*;
 
 use crate::commands::JobState;
@@ -37,6 +39,7 @@ pub struct AppState {
     pub tabs: SlotMap<TabKey, Tab>,
     pub collections: Collections,
     pub client: reqwest::Client,
+    pub cookie_store: Arc<CookieStoreMutex>,
     pub panes: pane_grid::State<SplitState>,
     pub popup: Option<Popup>,
     pub theme: Theme,
@@ -49,10 +52,12 @@ impl AppState {
         let mut tabs = SlotMap::with_key();
         let active_tab = tabs.insert(tab);
 
+        let (client, cookie_store) = create_client();
         Self {
             active_tab,
             tabs,
-            client: create_client(),
+            client,
+            cookie_store,
             collections: Collections::default(),
             panes: pane_grid::State::with_configuration(Configuration::Split {
                 axis: pane_grid::Axis::Vertical,

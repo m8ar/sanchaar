@@ -19,3 +19,4 @@ anyhow = { workspace = true }
 rfd = { workspace = true }
 log = { workspace = true }
 indexmap = { workspace = true }
+reqwest_cookie_store = { workspace = true }

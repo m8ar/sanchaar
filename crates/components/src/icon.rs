@@ -55,4 +55,5 @@ pub mod icons {
     pub const API: NerdIcon = NerdIcon('󱂛');
     pub const Folder: NerdIcon = NerdIcon('󰉋');
     pub const FolderOpen: NerdIcon = NerdIcon('󰝰');
+    pub const Cookie: NerdIcon = NerdIcon('󰆘');
 }

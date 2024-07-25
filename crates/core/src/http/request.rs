@@ -3,7 +3,7 @@ use strum::{Display, EnumString, VariantArray};
 
 use crate::assertions::Assertions;
 
-use super::{ KeyFileList, KeyValList};
+use super::{KeyFileList, KeyValList};
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum RequestBody {
@@ -59,7 +59,7 @@ impl Default for Request {
         Self {
             description: "Http request".to_string(),
             method: Method::GET,
-            url: "https://echo.nrjais.com".to_string(),
+            url: "https://facebook.com".to_string(),
             headers: KeyValList::new(),
             body: RequestBody::None,
             query_params: KeyValList::new(),

@@ -19,3 +19,4 @@ regex = { workspace = true }
 hcl-rs = { workspace = true }
 similar = { workspace = true }
 indexmap = { workspace = true }
+reqwest_cookie_store = { workspace = true }

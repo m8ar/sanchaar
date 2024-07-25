@@ -14,5 +14,6 @@ humansize = { workspace = true }
 serde_json = { workspace = true }
 reqwest = { workspace = true }
 hcl-rs = { workspace = true }
+reqwest_cookie_store = { workspace = true }
 colored_json = "5.0"
 hex = "0.4"

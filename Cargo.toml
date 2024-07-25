@@ -60,6 +60,7 @@ regex = "1.10"
 hcl-rs = "0.18"
 similar = "2.5"
 indexmap = "2.2.6"
+reqwest_cookie_store = "0.8.0"
 clap = { version = "4.5", features = ["derive"] }
 components = { path = "crates/components" }
 core = { path = "crates/core" }

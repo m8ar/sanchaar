@@ -1,6 +1,7 @@
-use std::time::Duration;
+use std::{sync::Arc, time::Duration};
 
 use reqwest::{header::HeaderMap, Client, Request, StatusCode};
+use reqwest_cookie_store::{CookieStore, CookieStoreMutex};
 
 #[derive(Debug, Clone)]
 pub enum ContentType {
@@ -62,8 +63,14 @@ pub async fn send_request(client: Client, req: Request) -> anyhow::Result<Respon
     })
 }
 
-pub fn create_client() -> reqwest::Client {
-    reqwest::Client::builder()
+pub fn create_client() -> (reqwest::Client, Arc<CookieStoreMutex>) {
+    let create_cookie_store = CookieStoreMutex::new(CookieStore::default());
+    let cookie_store = std::sync::Arc::new(create_cookie_store);
+
+    let client = reqwest::Client::builder()
+        .cookie_provider(Arc::clone(&cookie_store))
         .build()
-        .expect("Failed to create client")
+        .expect("Failed to create client");
+
+    (client, cookie_store)
 }
